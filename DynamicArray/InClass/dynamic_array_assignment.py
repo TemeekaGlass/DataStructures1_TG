@@ -63,6 +63,8 @@ class DynamicArray:
         # Return the number of values stored in this array.
         # Enables: len(da) and truthiness checks like "if da:"
         # replace with your implementation
+
+        #returns the size of the array by getting and reporting the dunder size attribute.
         return self._size
             
                
@@ -70,6 +72,8 @@ class DynamicArray:
         # Return the number of values stored in this array.
         # Same value as __len__; explicit name for readers unfamiliar with dunder methods.
         # replace with your implementation
+
+        #returns the size of the array by putting the dunder size attribute into a named variable and retrieving that value
         self.arrayLength = self._size
         return self.arrayLength
     
@@ -77,7 +81,9 @@ class DynamicArray:
     def get_capacity(self) -> int:
         # Return the total number of slots in the underlying array,
         # including empty sentinel slots. This is the hotel room count, not the guest count.
-        pass  # replace with your implementation
+        # replace with your implementation
+
+        #returns the capacity of the array by putting the dunder capacity attribute into a named variable and retrieving that value
         self.arrayCapacity = self._capacity
         return self.arrayCapacity
 
@@ -87,14 +93,49 @@ class DynamicArray:
         # Return -1 for any index outside that range -- including negative indices.
         # Caution: Python lists accept negative indices natively; you must check for them
         # explicitly, or get(-1) will silently return the last element instead of -1.
-        pass  # replace with your implementation
+        # replace with your implementation
+
+        #use the Capacity mthod to grab the array size 
+        positionValue = self.get_capacity()
+        #put the array into a variable to be be referenced using the str method
+        posValueItem = self._underlying
+        #if the input  index variable is greater than the capacity put into the positionValue, return -1 as those will not be in the array
+        #the index acts as the index indicator, returning the items at that position
+        if index > positionValue:
+            return (-1)
+        else:
+            return str(posValueItem[index])
+       
+
+        
 
     def index_of(self, value: int) -> int:
         # Return the position of the first occurrence of value.
         # Search only filled slots: positions 0 through _size - 1.
         # Do not search sentinel slots -- they all hold -1 and would give false matches.
         # Return -1 if value is not found.
-        pass  # replace with your implementation
+        # replace with your implementation
+        positionIndexNum = 0
+        positionIndexItem = self._underlying
+
+    
+        #using the size as a ceiling for running the loop, i can iterrate over the 
+        #values and compare them until it matches and returns the count of positionIndexNum
+        #if the count of postindexnum counts greater than the size len(self) then it should return -1 line 
+        # since the value was not found
+        for positionIndexNum in range(len(self)):
+            if value == positionIndexItem[positionIndexNum]:
+                return positionIndexNum #, posIndexItem, len(self)-1
+            else:
+                if value != positionIndexItem[positionIndexNum]:
+                     positionIndexNum += 1
+                if len(self) <= positionIndexNum:
+                    return "-1  (not in array)"#, positionIndexNum, len(self)
+
+        
+       
+
+
 
 
 if __name__ == "__main__":
@@ -103,9 +144,9 @@ if __name__ == "__main__":
     da.add(60626)
     da.add(90210)
     #da.add(90211)
-   # da.add(90212)
-   # da.add(90213)
-   # da.add(90214)
+    #da.add(90212)
+    #da.add(90213)
+    #da.add(90214)
     print(da)                    # expected: [10001, 60626, 90210]
 
     print()
